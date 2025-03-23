@@ -12,4 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5de81780d03d15c44a9eae6fd1f7307a, type: 3}
   m_Name: CuttingRecipeListSO
   m_EditorClassIdentifier: 
-  list: []
+  list:
+  - input: {fileID: 11400000, guid: 555479a1931cc3642a5c25bdc667acf2, type: 2}
+    output: {fileID: 11400000, guid: cd9c572fa3cd5e24b84db042c60a9308, type: 2}
+    cuttingCountMax: 3
+  - input: {fileID: 11400000, guid: a0e92fa663a322a4eb3a5c2256111d1e, type: 2}
+    output: {fileID: 11400000, guid: ce79070135f390948a7b67ea6a5d570a, type: 2}
+    cuttingCountMax: 4
+  - input: {fileID: 11400000, guid: d043c9577344f6746ac03a50142a054d, type: 2}
+    output: {fileID: 11400000, guid: 87f33afd85403fb41b6da63a2a2ae46d, type: 2}
+    cuttingCountMax: 5

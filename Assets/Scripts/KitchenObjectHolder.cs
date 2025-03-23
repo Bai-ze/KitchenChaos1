@@ -14,7 +14,7 @@ public class KitchenObjectHolder : MonoBehaviour
     }
 
     /// <summary>
-    /// 判断玩家手中是否有物品
+    /// 判断是否有物品
     /// </summary>
     /// <returns>有物品返回true，没有则返回false</returns>
     public bool IsHaveKitchenObject()

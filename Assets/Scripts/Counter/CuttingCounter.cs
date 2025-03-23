@@ -6,6 +6,8 @@ public class CuttingCounter : BaseCounter
 {
     [SerializeField] private CuttingRecipeListSO cuttingRecipeList;
 
+    private int cuttingCount = 0;
+
     public override void Interact(Player player)
     {
         if (player.IsHaveKitchenObject())
@@ -42,14 +44,16 @@ public class CuttingCounter : BaseCounter
     {
         if (IsHaveKitchenObject())
         {
-            KitchenObjectSO output = cuttingRecipeList.GetOutput(GetKichenObject().GetKitchenObjectSO());
-            if (output != null)
+            if (cuttingRecipeList.TryGetCuttingRecipe(GetKichenObject().GetKitchenObjectSO(), out CuttingRecipe cuttingRecipe) )
             {
-                DestroyKitchenObject();
-                CreateKitchenObject(output.prefab);
-            }
+                cuttingCount++;
 
-            
+                if(cuttingCount == cuttingRecipe.cuttingCountMax)
+                {
+                    DestroyKitchenObject();
+                    CreateKitchenObject(cuttingRecipe.output.prefab);
+                }
+            }
         }
     }
 }
