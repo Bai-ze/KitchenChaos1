@@ -6,6 +6,7 @@ public class CuttingCounter : BaseCounter
 {
     [SerializeField] private CuttingRecipeListSO cuttingRecipeList;
     [SerializeField] private ProgressBarUI progressBarUI;
+    [SerializeField] private CuttingCounterVisual CuttingCounterVisual;
 
     private int cuttingCount = 0;
 
@@ -17,6 +18,7 @@ public class CuttingCounter : BaseCounter
             if (IsHaveKitchenObject() == false)
             {
                 //当前柜台为空
+                cuttingCount = 0;
                 TransferKitchenObject(player, this);
             }
             else
@@ -48,8 +50,7 @@ public class CuttingCounter : BaseCounter
         {
             if (cuttingRecipeList.TryGetCuttingRecipe(GetKichenObject().GetKitchenObjectSO(), out CuttingRecipe cuttingRecipe) )
             {
-                cuttingCount++;
-
+                Cut();
                 progressBarUI.UpdateProgress((float)cuttingCount / cuttingRecipe.cuttingCountMax);
 
                 if(cuttingCount == cuttingRecipe.cuttingCountMax)
@@ -59,5 +60,11 @@ public class CuttingCounter : BaseCounter
                 }
             }
         }
+    }
+
+    private void Cut()
+    {
+        cuttingCount++;
+        CuttingCounterVisual.PlayCut();
     }
 }
