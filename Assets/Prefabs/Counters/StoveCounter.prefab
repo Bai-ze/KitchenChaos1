@@ -225,6 +225,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   holdPoint: {fileID: 8476471953117358771}
   selectedCounter: {fileID: 5408788185107507441}
+  fryingRecipeList: {fileID: 11400000, guid: 0ea16efa64593384c96dd5c56ccd981e, type: 2}
 --- !u!1001 &8412182273734265947
 PrefabInstance:
   m_ObjectHideFlags: 0
