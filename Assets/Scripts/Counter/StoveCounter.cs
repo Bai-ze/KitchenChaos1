@@ -5,6 +5,7 @@ using UnityEngine;
 public class StoveCounter : BaseCounter
 {
     [SerializeField] private FryingRecipeListSO fryingRecipeList;
+    [SerializeField] private FryingRecipeListSO burningRecipeList;
 
     public enum StoveState
     {
@@ -21,29 +22,40 @@ public class StoveCounter : BaseCounter
     {
         if (player.IsHaveKitchenObject())
         {//手上有食材
-            if (IsHaveKitchenObject() == false && fryingRecipeList.TryGetFryingRecipe(player.GetKichenObject().GetKitchenObjectSO(), 
-                out FryingRecipe fryingRecipe))
+            if (IsHaveKitchenObject() == false)
             {//当前柜台为空
-                TransferKitchenObject(player, this);
-                StartFrying(fryingRecipe);
+                if(fryingRecipeList.TryGetFryingRecipe(player.GetKichenObject().GetKitchenObjectSO(),
+                out FryingRecipe fryingRecipe))
+                {
+                    TransferKitchenObject(player, this);
+                    StartFrying(fryingRecipe);
+                }
+                else if(burningRecipeList.TryGetFryingRecipe(player.GetKichenObject().GetKitchenObjectSO(),
+                out FryingRecipe burningRecipe))
+                {
+                    TransferKitchenObject(player, this);
+                    StartBurning(burningRecipe);
+                }
+                else
+                {
+
+                }
+
             }
             else
-            {
-                //当前柜台不为空
+            {//当前柜台不为空
 
             }
         }
         else
-        {
-            // 手上没有食材
+        {// 手上没有食材
             if (IsHaveKitchenObject() == false)
-            {
-                //当前柜台为空
+            {//当前柜台为空
 
             }
             else
-            {
-                //当前柜台不为空
+            {//当前柜台不为空
+                state = StoveState.Idle;
                 TransferKitchenObject(this, player);
             }
         }
@@ -67,7 +79,7 @@ public class StoveCounter : BaseCounter
                     DestroyKitchenObject();
                     CreateKitchenObject(fryingRecipe.output.prefab);
 
-                    fryingRecipeList.TryGetFryingRecipe(GetKichenObject().GetKitchenObjectSO(),
+                    burningRecipeList.TryGetFryingRecipe(GetKichenObject().GetKitchenObjectSO(),
                         out FryingRecipe newFryingRecipe);
                     StartBurning(newFryingRecipe);
                 }
