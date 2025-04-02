@@ -6,6 +6,7 @@ public class StoveCounter : BaseCounter
 {
     [SerializeField] private FryingRecipeListSO fryingRecipeList;
     [SerializeField] private FryingRecipeListSO burningRecipeList;
+    [SerializeField] private StoveCounterVisual stoveCounterVisual;
 
     public enum StoveState
     {
@@ -55,7 +56,7 @@ public class StoveCounter : BaseCounter
             }
             else
             {//当前柜台不为空
-                state = StoveState.Idle;
+                TurnToIdle();
                 TransferKitchenObject(this, player);
             }
         }
@@ -90,7 +91,7 @@ public class StoveCounter : BaseCounter
                 {
                     DestroyKitchenObject();
                     CreateKitchenObject(fryingRecipe.output.prefab);
-                    state = StoveState.Idle;
+                    TurnToIdle();
                 }
                 break;
             default: 
@@ -103,6 +104,7 @@ public class StoveCounter : BaseCounter
         fryingTimer = 0;
         this.fryingRecipe = fryingRecipe;
         state = StoveState.Frying;
+        stoveCounterVisual.ShowStoveEffect();
     }
 
     private void StartBurning(FryingRecipe fryingRecipe)
@@ -110,12 +112,18 @@ public class StoveCounter : BaseCounter
         if(fryingRecipe == null)
         {
             Debug.LogWarning("无法获取Burning的食谱，无法进行Burning");
-            state = StoveState.Idle;
+            TurnToIdle();
             return;
         }
-
+        stoveCounterVisual.ShowStoveEffect();
         fryingTimer = 0;
         this.fryingRecipe = fryingRecipe;
         state = StoveState.Burning;
+    }
+
+    private void TurnToIdle()
+    {
+        state = StoveState.Idle;
+        stoveCounterVisual.HideStoveEffect();
     }
 }
