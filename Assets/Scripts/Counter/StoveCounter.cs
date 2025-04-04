@@ -7,6 +7,7 @@ public class StoveCounter : BaseCounter
     [SerializeField] private FryingRecipeListSO fryingRecipeList;
     [SerializeField] private FryingRecipeListSO burningRecipeList;
     [SerializeField] private StoveCounterVisual stoveCounterVisual;
+    [SerializeField] private ProgressBarUI progressBarUI;
 
     public enum StoveState
     {
@@ -75,6 +76,7 @@ public class StoveCounter : BaseCounter
                 break;
             case StoveState.Frying:
                 fryingTimer += Time.deltaTime;
+                progressBarUI.UpdateProgress(fryingTimer/fryingRecipe.fryingTime);
                 if(fryingTimer >= fryingRecipe.fryingTime)
                 {
                     DestroyKitchenObject();
@@ -87,6 +89,7 @@ public class StoveCounter : BaseCounter
                 break;
             case StoveState.Burning:
                 fryingTimer += Time.deltaTime;
+                progressBarUI.UpdateProgress(fryingTimer / fryingRecipe.fryingTime);
                 if (fryingTimer >= fryingRecipe.fryingTime)
                 {
                     DestroyKitchenObject();
@@ -123,6 +126,7 @@ public class StoveCounter : BaseCounter
 
     private void TurnToIdle()
     {
+        progressBarUI.Hide();
         state = StoveState.Idle;
         stoveCounterVisual.HideStoveEffect();
     }
