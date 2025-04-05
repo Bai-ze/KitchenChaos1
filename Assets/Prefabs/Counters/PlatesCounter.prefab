@@ -320,6 +320,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   holdPoint: {fileID: 4522258924565029148}
   selectedCounter: {fileID: 3156555629664872825}
+  plateSO: {fileID: 11400000, guid: 6e67f3c56c24b0b4ea06ede4e89bd3ec, type: 2}
+  spawnRate: 1
+  plateCounterMax: 5
 --- !u!4 &1045705159822066751 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8449194184338771197, guid: 0d28cc22474602348b258e6c41211bdc,
