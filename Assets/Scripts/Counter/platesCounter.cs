@@ -14,7 +14,7 @@ public class platesCounter : BaseCounter
 
     private void Update()
     {
-        if(platesList.Count < plateCounterMax)
+        if (platesList.Count < plateCounterMax)
         {
             timer += Time.deltaTime;
         }
@@ -25,9 +25,20 @@ public class platesCounter : BaseCounter
         }
     }
 
+
+
     public override void Interact(Player player)
     {
-        base.Interact(player);
+        if (player.IsHaveKitchenObject() == false)
+        {
+            // 手上没有食材
+            if (platesList.Count > 0)
+            {
+                player.AddKitchenObject(platesList[platesList.Count - 1]);
+                platesList.RemoveAt(platesList.Count - 1);
+            }
+        }
+
     }
 
     public void SpawnPlate()
