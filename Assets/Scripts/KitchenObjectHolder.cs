@@ -13,6 +13,11 @@ public class KitchenObjectHolder : MonoBehaviour
         return kitchenObject;
     }
 
+    public KitchenObjectSO GetKitchenObjectSO()
+    {
+        return kitchenObject.GetKitchenObjectSO();
+    }
+
     /// <summary>
     /// 判断是否有物品
     /// </summary>
