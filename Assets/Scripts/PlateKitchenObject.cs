@@ -6,6 +6,8 @@ public class PlateKitchenObject : KitchenObject
 {
     [SerializeField] private List<KitchenObjectSO> validKitchenObjectSOList;
 
+    [SerializeField] private PlateCompleteVisual plateCompleteVisual;
+
     private List<KitchenObjectSO> kitchenObjectSOList = new List<KitchenObjectSO>();
     public bool AddKitchenObjectSO(KitchenObjectSO kitchenObjectSO)
     {
@@ -18,6 +20,7 @@ public class PlateKitchenObject : KitchenObject
             return false;
         }
 
+        plateCompleteVisual.ShowKitchenObject(kitchenObjectSO);
         kitchenObjectSOList.Add(kitchenObjectSO);
         return true;
     }
