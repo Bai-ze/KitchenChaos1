@@ -7,7 +7,7 @@ public class PlateKitchenObject : KitchenObject
     [SerializeField] private List<KitchenObjectSO> validKitchenObjectSOList;
 
     private List<KitchenObjectSO> kitchenObjectSOList = new List<KitchenObjectSO>();
-    public bool AddKitchenObject(KitchenObjectSO kitchenObjectSO)
+    public bool AddKitchenObjectSO(KitchenObjectSO kitchenObjectSO)
     {
         if (kitchenObjectSOList.Contains(kitchenObjectSO))
         {

@@ -18,7 +18,7 @@ public class ClearCounter : BaseCounter
                 }
                 else
                 {//当前柜台不为空
-                    bool isSuccess = plateKitchenobject.AddKitchenObject(GetKitchenObjectSO());
+                    bool isSuccess = plateKitchenobject.AddKitchenObjectSO(GetKitchenObjectSO());
                     if(isSuccess == true)
                     {
                         DestroyKitchenObject();
@@ -30,12 +30,17 @@ public class ClearCounter : BaseCounter
             {
                 if (IsHaveKitchenObject() == false)
                 {//当前柜台为空
-                    
                     TransferKitchenObject(player, this);
                 }
                 else
                 {//当前柜台不为空
-                    
+                    if(GetKichenObject().TryGetComponent<PlateKitchenObject>(out plateKitchenobject))
+                    {
+                        if (plateKitchenobject.AddKitchenObjectSO(player.GetKitchenObjectSO()))
+                        {
+                            player.DestroyKitchenObject();
+                        }
+                    }
                 }
             }
 
