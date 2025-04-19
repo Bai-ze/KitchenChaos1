@@ -6,6 +6,10 @@ public class DeliveryCounter : BaseCounter
 {
     public override void Interact(Player player)
     {
-        base.Interact(player);
+        if(player.IsHaveKitchenObject() 
+            && player.GetKichenObject().TryGetComponent<PlateKitchenObject>(out PlateKitchenObject plateKitchenObject))
+        {
+            player.DestroyKitchenObject();
+        }
     }
 }
