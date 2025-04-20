@@ -27,4 +27,9 @@ public class PlateKitchenObject : KitchenObject
         kitchenObjectSOList.Add(kitchenObjectSO);
         return true;
     }
+
+    public List<KitchenObjectSO> GetKitchenObjectSOList()
+    {
+        return kitchenObjectSOList;
+    }
 }
