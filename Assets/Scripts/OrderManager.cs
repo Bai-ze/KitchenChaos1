@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,9 @@ public class OrderManager : MonoBehaviour
 {
     //单例模式
     public static OrderManager Instance { get; private set; }
+
+    //发布-订阅
+    public event EventHandler OnRecipeSpawned;
 
     [SerializeField] private RecipeListSO recipeSOList;
     [SerializeField] private int orderMaxCount = 5;
@@ -54,8 +58,10 @@ public class OrderManager : MonoBehaviour
         if (orderCount >= orderMaxCount) return;
 
         orderCount++;
-        int index = Random.Range(0, recipeSOList.recipeSOList.Count);
+        int index = UnityEngine.Random.Range(0, recipeSOList.recipeSOList.Count);
         orderRecipeSOList.Add(recipeSOList.recipeSOList[index]);
+
+        OnRecipeSpawned?.Invoke(this,EventArgs.Empty);
     }
 
     public void DeliveryRecipe(PlateKitchenObject plateKitchenObject)
@@ -99,5 +105,10 @@ public class OrderManager : MonoBehaviour
         }
 
         return true;
+    }
+
+    public List<RecipeSO> GetOrderList()
+    {
+        return orderRecipeSOList;
     }
 }

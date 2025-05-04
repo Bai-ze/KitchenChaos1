@@ -2783,6 +2783,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1765354297}
+  - component: {fileID: 1765354298}
   m_Layer: 5
   m_Name: OrderRecipeListUI
   m_TagString: Untagged
@@ -2811,6 +2812,20 @@ RectTransform:
   m_AnchoredPosition: {x: 322.05304, y: -540}
   m_SizeDelta: {x: 644.1061, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1765354298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765354296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 895e74302aeac014093793d03fa28988, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recipeParent: {fileID: 109119434}
+  recipeUITemplate: {fileID: 1837245305}
 --- !u!1001 &1799269117
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2890,6 +2905,7 @@ GameObject:
   - component: {fileID: 1837245302}
   - component: {fileID: 1837245304}
   - component: {fileID: 1837245303}
+  - component: {fileID: 1837245305}
   m_Layer: 5
   m_Name: RecipeTemplate
   m_TagString: Untagged
@@ -2956,6 +2972,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1837245301}
   m_CullTransparentMesh: 1
+--- !u!114 &1837245305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837245301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 416816c61b099ec4eab36c38eb456018, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1855394263
 PrefabInstance:
   m_ObjectHideFlags: 0
