@@ -1,18 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RecipeUI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private TextMeshProUGUI recipeNameText;
+    [SerializeField] private Transform kitchenObjectParent;
+    [SerializeField] private Image iconUITemplate;
+
+    private void Start()
     {
-        
+        iconUITemplate.gameObject.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateUI(RecipeSO recipeSO)
     {
-        
+        recipeNameText.text = recipeSO.recipeName;
+        foreach (KitchenObjectSO kitchenObjectSO in recipeSO.kitchenObjectSOList)
+        {
+            Image newIcon = GameObject.Instantiate(iconUITemplate);
+            newIcon.transform.SetParent(kitchenObjectParent);
+            newIcon.sprite = kitchenObjectSO.Sprite;
+            newIcon.gameObject.SetActive(true);
+        }
     }
 }

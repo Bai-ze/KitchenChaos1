@@ -10,6 +10,7 @@ public class OrderManager : MonoBehaviour
 
     //发布-订阅
     public event EventHandler OnRecipeSpawned;
+    public event EventHandler OnRecipeSuccessed;
 
     [SerializeField] private RecipeListSO recipeSOList;
     [SerializeField] private int orderMaxCount = 5;
@@ -82,6 +83,7 @@ public class OrderManager : MonoBehaviour
         else
         {
             orderRecipeSOList.Remove(correctRecipe);
+            OnRecipeSuccessed?.Invoke(this, EventArgs.Empty);
             print("上菜成功");
         }
     }

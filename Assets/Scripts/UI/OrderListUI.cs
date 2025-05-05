@@ -11,6 +11,12 @@ public class OrderListUI : MonoBehaviour
     {
         recipeUITemplate.gameObject.SetActive(false);
         OrderManager.Instance.OnRecipeSpawned += Instance_OnRecipeSpawned;
+        OrderManager.Instance.OnRecipeSuccessed += Instance_OnRecipeSuccessed;
+    }
+
+    private void Instance_OnRecipeSuccessed(object sender, System.EventArgs e)
+    {
+        UpdateUI();
     }
 
     private void Instance_OnRecipeSpawned(object sender, System.EventArgs e)
@@ -34,6 +40,7 @@ public class OrderListUI : MonoBehaviour
             RecipeUI recipeUI = GameObject.Instantiate(recipeUITemplate);
             recipeUI.transform.SetParent(recipeParent);
             recipeUI.gameObject.SetActive(true);
+            recipeUI.UpdateUI(recipeSO);
         }
     }
 }
