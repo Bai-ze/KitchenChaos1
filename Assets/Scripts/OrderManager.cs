@@ -10,7 +10,8 @@ public class OrderManager : MonoBehaviour
 
     //发布-订阅
     public event EventHandler OnRecipeSpawned;
-    public event EventHandler OnRecipeSuccessed;
+    public event EventHandler OnRecipeSuccessed; //上菜成功
+    public event EventHandler OnRecipeFailed; //上菜失败
 
     [SerializeField] private RecipeListSO recipeSOList;
     [SerializeField] private int orderMaxCount = 5;
@@ -79,6 +80,7 @@ public class OrderManager : MonoBehaviour
         if (correctRecipe == null)
         {
             print("上菜失败");
+            OnRecipeFailed?.Invoke(this, EventArgs.Empty);
         }
         else
         {
