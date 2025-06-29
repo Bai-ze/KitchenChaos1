@@ -2,7 +2,14 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
+    public static SoundManager Instance { get; private set; }
+
     [SerializeField] private AudioClipRefSO audioClipRefSO;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -44,6 +51,11 @@ public class SoundManager : MonoBehaviour
         PlaySound(audioClipRefSO.deliverySuccess);
     }
 
+    public void PlayStepSound(float volume = 1f)
+    {
+        PlaySound(audioClipRefSO.footstep);
+    }
+
     /// <summary>
     /// 播放音效
     /// </summary>
@@ -62,7 +74,7 @@ public class SoundManager : MonoBehaviour
     /// </summary>
     /// <param name="clips"></param>
     /// <param name="volume"></param>
-    private void PlaySound(AudioClip[] clips, float volume = 1.0f)
+    private void PlaySound(AudioClip[] clips, float volume = 0.1f)
     {
         PlaySound(clips, Camera.main.transform.position);
     }
