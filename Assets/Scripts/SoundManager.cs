@@ -11,6 +11,12 @@ public class SoundManager : MonoBehaviour
         CuttingCounter.OnCut += CuttingCounter_OnCut;
         KitchenObjectHolder.OnDrop += KitchenObjectHolder_OnDrop;
         KitchenObjectHolder.OnPickup += KitchenObjectHolder_OnPickup;
+        TrashCounter.OnObjectTrshed += TrashCounter_OnObjectTrshed;
+    }
+
+    private void TrashCounter_OnObjectTrshed(object sender, System.EventArgs e)
+    {
+        PlaySound(audioClipRefSO.trash);
     }
 
     private void KitchenObjectHolder_OnPickup(object sender, System.EventArgs e)
