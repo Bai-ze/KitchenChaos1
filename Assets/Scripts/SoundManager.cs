@@ -9,6 +9,18 @@ public class SoundManager : MonoBehaviour
         OrderManager.Instance.OnRecipeSuccessed += OrderManeger_OnRecipeSuccessed;
         OrderManager.Instance.OnRecipeFailed += OrderManager_OnRecipeFailed;
         CuttingCounter.OnCut += CuttingCounter_OnCut;
+        KitchenObjectHolder.OnDrop += KitchenObjectHolder_OnDrop;
+        KitchenObjectHolder.OnPickup += KitchenObjectHolder_OnPickup;
+    }
+
+    private void KitchenObjectHolder_OnPickup(object sender, System.EventArgs e)
+    {
+        PlaySound(audioClipRefSO.objectPickup);
+    }
+
+    private void KitchenObjectHolder_OnDrop(object sender, System.EventArgs e)
+    {
+        PlaySound(audioClipRefSO.objectDrop);
     }
 
     private void CuttingCounter_OnCut(object sender, System.EventArgs e)
