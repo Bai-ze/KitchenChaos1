@@ -1,9 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance {  get; private set; }
+
+    public event EventHandler OnStateChanged;
+
     private enum State
     {
         WattingToStart,
@@ -11,6 +16,8 @@ public class GameManager : MonoBehaviour
         GamePlaying,
         GameOver
     }
+
+    [SerializeField] private Player player;
 
     private State state;
 
@@ -20,7 +27,13 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        state = State.WattingToStart;
+        Instance = this;
+        
+    }
+
+    private void Start()
+    {
+        TurnToWaittingToStart();
     }
 
     // Update is called once per frame
@@ -57,18 +70,48 @@ public class GameManager : MonoBehaviour
 
     }
 
+    private void TurnToWaittingToStart()
+    {
+        state = State.WattingToStart;
+        DisablePlayer();
+        OnStateChanged?.Invoke(this, EventArgs.Empty);
+    }
     private void TurnToCountDownToStart()
     {
         state = State.CountDownToStart;
+        DisablePlayer();
+        OnStateChanged?.Invoke(this, EventArgs.Empty);
     }
     private void TurnToGamePlaying()
     {
         state = State.GamePlaying;
+        EnablePlayer();
+        OnStateChanged?.Invoke(this, EventArgs.Empty);
 
     }
     private void TurnToGameOver()
     {
         state = State.GameOver;
+        OnStateChanged?.Invoke(this, EventArgs.Empty);
+    }
 
+
+    private void DisablePlayer()
+    {
+        player.enabled = false;
+    }
+    private void EnablePlayer()
+    {
+        player.enabled = true;
+    }
+
+    public bool IsCountDownState()
+    {
+        return state == State.CountDownToStart;
+    }
+
+    public float GetCountDownTimer()
+    {
+        return countDownToStartTimer;
     }
 }
