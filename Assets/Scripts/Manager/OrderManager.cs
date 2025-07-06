@@ -30,7 +30,15 @@ public class OrderManager : MonoBehaviour
 
     private void Start()
     {
-        isStartOrder = true;
+        GameManager.Instance.OnStateChanged += GameManage_OnStateChanged;
+    }
+
+    private void GameManage_OnStateChanged(object sender, EventArgs e)
+    {
+        if (GameManager.Instance.IsGamePlayingState())
+        {
+            StartSpawnOrder();
+        }
     }
 
     private void Update()
@@ -114,5 +122,10 @@ public class OrderManager : MonoBehaviour
     public List<RecipeSO> GetOrderList()
     {
         return orderRecipeSOList;
+    }
+
+    public void StartSpawnOrder()
+    {
+        isStartOrder = true;
     }
 }
