@@ -22,6 +22,7 @@ public class OrderManager : MonoBehaviour
     private float orderTimer = 0;
     private bool isStartOrder = false;
     private int orderCount = 0;
+    private int successDeliveryCount = 0; //成功制作的菜数
 
     private void Awake()
     {
@@ -94,6 +95,7 @@ public class OrderManager : MonoBehaviour
         {
             orderRecipeSOList.Remove(correctRecipe);
             OnRecipeSuccessed?.Invoke(this, EventArgs.Empty);
+            successDeliveryCount++;
             print("上菜成功");
         }
     }
@@ -127,5 +129,10 @@ public class OrderManager : MonoBehaviour
     public void StartSpawnOrder()
     {
         isStartOrder = true;
+    }
+
+    public int GetSuccessDeliveryCount()
+    {
+        return successDeliveryCount;
     }
 }

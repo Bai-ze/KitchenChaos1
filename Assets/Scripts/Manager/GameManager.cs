@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
 
     private float wattingToStartTimer = 1;
     private float countDownToStartTimer = 3;
-    private float gamePlayingTimer = 10;
+    private float gamePlayingTimer = 20;
 
     void Awake()
     {
@@ -92,6 +92,7 @@ public class GameManager : MonoBehaviour
     private void TurnToGameOver()
     {
         state = State.GameOver;
+        DisablePlayer();
         OnStateChanged?.Invoke(this, EventArgs.Empty);
     }
 
@@ -113,6 +114,10 @@ public class GameManager : MonoBehaviour
     public bool IsGamePlayingState()
     {
         return state == State.GamePlaying;
+    }
+    public bool IsGameOverState()
+    {
+        return state == State.GameOver;
     }
 
     public float GetCountDownTimer()
