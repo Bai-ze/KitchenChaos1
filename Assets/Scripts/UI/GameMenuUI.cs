@@ -13,7 +13,7 @@ public class GameMenuUI : MonoBehaviour
     {
         startButton.onClick.AddListener(() =>
         {
-
+            Loader.Load(Loader.Scene.GameScene);
         });
 
         quitButton.onClick.AddListener(() =>
