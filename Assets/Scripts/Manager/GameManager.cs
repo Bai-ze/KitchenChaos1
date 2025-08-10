@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance {  get; private set; }
+    public static GameManager Instance { get; private set; }
 
     public event EventHandler OnStateChanged;
 
@@ -25,15 +25,23 @@ public class GameManager : MonoBehaviour
     private float countDownToStartTimer = 3;
     private float gamePlayingTimer = 20;
 
+    private bool isGamePause = false;
+
     void Awake()
     {
         Instance = this;
-        
+
     }
 
     private void Start()
     {
         TurnToWaittingToStart();
+        GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
+    }
+
+    private void GameInput_OnPauseAction(object sender, EventArgs e)
+    {
+        ToggleGame();
     }
 
     // Update is called once per frame
@@ -43,21 +51,21 @@ public class GameManager : MonoBehaviour
         {
             case State.WattingToStart:
                 wattingToStartTimer -= Time.deltaTime;
-                if(wattingToStartTimer <= 0)
+                if (wattingToStartTimer <= 0)
                 {
                     TurnToCountDownToStart();
                 }
                 break;
             case State.CountDownToStart:
                 countDownToStartTimer -= Time.deltaTime;
-                if(countDownToStartTimer <= 0)
+                if (countDownToStartTimer <= 0)
                 {
                     TurnToGamePlaying();
                 }
                 break;
             case State.GamePlaying:
                 gamePlayingTimer -= Time.deltaTime;
-                if(gamePlayingTimer <= 0)
+                if (gamePlayingTimer <= 0)
                 {
                     TurnToGameOver();
                 }
@@ -123,5 +131,19 @@ public class GameManager : MonoBehaviour
     public float GetCountDownTimer()
     {
         return countDownToStartTimer;
+    }
+
+    private void ToggleGame()
+    {
+        isGamePause = !isGamePause;
+        if (isGamePause)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
+
     }
 }
