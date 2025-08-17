@@ -71,4 +71,9 @@ public class CuttingCounter : BaseCounter
         cuttingCount++;
         CuttingCounterVisual.PlayCut();
     }
+
+    public static void ClearStaticData()
+    {
+        OnCut = null;
+    }
 }

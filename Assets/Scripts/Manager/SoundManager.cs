@@ -23,6 +23,7 @@ public class SoundManager : MonoBehaviour
 
     private void TrashCounter_OnObjectTrshed(object sender, System.EventArgs e)
     {
+        print("11");
         PlaySound(audioClipRefSO.trash);
     }
 

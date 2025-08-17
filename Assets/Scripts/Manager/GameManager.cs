@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public event EventHandler OnStateChanged;
+    public event EventHandler OnGamePaused;
+    public event EventHandler OnGameUnpaused;
 
     private enum State
     {
@@ -133,16 +135,18 @@ public class GameManager : MonoBehaviour
         return countDownToStartTimer;
     }
 
-    private void ToggleGame()
+    public void ToggleGame()
     {
         isGamePause = !isGamePause;
         if (isGamePause)
         {
             Time.timeScale = 0;
+            OnGamePaused?.Invoke(this,EventArgs.Empty);
         }
         else
         {
             Time.timeScale = 1;
+            OnGameUnpaused?.Invoke(this,EventArgs.Empty);
         }
 
     }
