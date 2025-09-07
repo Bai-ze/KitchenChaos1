@@ -6,6 +6,8 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField] private AudioClipRefSO audioClipRefSO;
 
+    private float volume = 5;
+
     private void Awake()
     {
         Instance = this;
@@ -52,9 +54,9 @@ public class SoundManager : MonoBehaviour
         PlaySound(audioClipRefSO.deliverySuccess);
     }
 
-    public void PlayStepSound(float volume = 1f)
+    public void PlayStepSound(float volumeMutipler = 1f)
     {
-        PlaySound(audioClipRefSO.footstep);
+        PlaySound(audioClipRefSO.footstep, volumeMutipler);
     }
 
     /// <summary>
@@ -62,21 +64,31 @@ public class SoundManager : MonoBehaviour
     /// </summary>
     /// <param name="clips">音效</param>
     /// <param name="position">播放位置</param>
-    /// <param name="volume">音量大小</param>
-    private void PlaySound(AudioClip[] clips, Vector3 position, float volume = 0.5f)
+    /// <param name="volumeMutipler">音量大小</param>
+    private void PlaySound(AudioClip[] clips, Vector3 position, float volumeMutipler = 0.5f)
     {
         int index = Random.Range(0, clips.Length);
 
-        AudioSource.PlayClipAtPoint(clips[index], position, volume);
+        AudioSource.PlayClipAtPoint(clips[index], position, volumeMutipler * (volume / 10.0f));
     }
 
     /// <summary>
     /// PlaySound重载
     /// </summary>
     /// <param name="clips"></param>
-    /// <param name="volume"></param>
-    private void PlaySound(AudioClip[] clips, float volume = 0.1f)
+    /// <param name="volumeMutipler"></param>
+    private void PlaySound(AudioClip[] clips, float volumeMutipler = 0.1f)
     {
-        PlaySound(clips, Camera.main.transform.position);
+        PlaySound(clips, Camera.main.transform.position, volumeMutipler);
+    }
+
+    public void ChangeVolume()
+    {
+        // volume 1~10  -> 0~1
+        volume++;
+        if (volume > 10)
+        {
+            volume = 0;
+        }
     }
 }
