@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,7 @@ public class SettingsUI : MonoBehaviour
 
     [SerializeField] private GameObject uiParent;
     [SerializeField] private Button soundButton;
+    [SerializeField] private TextMeshProUGUI soundButtonText;
     [SerializeField] private Button musicButton;
     [SerializeField] private Button closeButton;
 
@@ -19,10 +21,12 @@ public class SettingsUI : MonoBehaviour
     private void Start()
     {
         Hide();
+        UpdateVisual();
 
         soundButton.onClick.AddListener(() =>
         {
             SoundManager.Instance.ChangeVolume();
+            UpdateVisual();
         });
         musicButton.onClick.AddListener(() =>
         {
@@ -42,6 +46,11 @@ public class SettingsUI : MonoBehaviour
     private void Hide()
     {
         uiParent.SetActive(false);
+    }
+
+    private void UpdateVisual()
+    {
+        soundButtonText.text = "音效大小：" + SoundManager.Instance.GetVolume();
     }
 
 }

@@ -4197,6 +4197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiParent: {fileID: 1822340208}
   soundButton: {fileID: 459726899}
+  soundButtonText: {fileID: 905056203}
   musicButton: {fileID: 962788119}
   closeButton: {fileID: 719789116}
 --- !u!1 &1298964953 stripped

@@ -6,7 +6,7 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField] private AudioClipRefSO audioClipRefSO;
 
-    private float volume = 5;
+    private int volume = 5;
 
     private void Awake()
     {
@@ -90,5 +90,10 @@ public class SoundManager : MonoBehaviour
         {
             volume = 0;
         }
+    }
+
+    public int GetVolume()
+    {
+        return volume;
     }
 }
