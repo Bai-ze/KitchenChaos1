@@ -26,7 +26,17 @@ public class MusicManager : MonoBehaviour
 
     private void UpdateVolume()
     {
-        audioSource.volume = originalVolume * (volume / 10.0f);
+        if (volume == 0)
+        {
+            audioSource.enabled = false;
+        }
+        else
+        {
+            audioSource.enabled = true;
+            audioSource.volume = originalVolume * (volume / 10.0f);
+        }
+        //audioSource.volume = originalVolume * (volume / 10.0f);
+
     }
 
     public void ChangeVolume()

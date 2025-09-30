@@ -67,6 +67,8 @@ public class SoundManager : MonoBehaviour
     /// <param name="volumeMutipler">音量大小</param>
     private void PlaySound(AudioClip[] clips, Vector3 position, float volumeMutipler = 0.5f)
     {
+        if (volume == 0) { return; }
+
         int index = Random.Range(0, clips.Length);
 
         AudioSource.PlayClipAtPoint(clips[index], position, volumeMutipler * (volume / 10.0f));
