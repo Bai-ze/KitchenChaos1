@@ -6,6 +6,8 @@ public class MusicManager : MonoBehaviour
 {
     public static MusicManager Instance { get; private set; }
 
+    private const string MUSICMANAGER_VOLUME = "MusicmanagerVolume";
+
     private AudioSource audioSource;
 
     private float originalVolume;
@@ -15,6 +17,7 @@ public class MusicManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        LoadVolume();
     }
     // Start is called before the first frame update
     void Start()
@@ -45,10 +48,21 @@ public class MusicManager : MonoBehaviour
         if (volume > 10) volume = 0;
 
         UpdateVolume();
+        SaveVolume();
     }
 
     public int GetVolume()
     {
         return volume;
+    }
+
+    private void SaveVolume()
+    {
+        PlayerPrefs.SetInt(MUSICMANAGER_VOLUME, volume);
+    }
+
+    private void LoadVolume()
+    {
+        volume = PlayerPrefs.GetInt(MUSICMANAGER_VOLUME, volume);
     }
 }

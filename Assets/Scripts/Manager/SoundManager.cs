@@ -4,6 +4,8 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; private set; }
 
+    private const string SOUNDMANAGER_VOLUME = "SoundmanagerVolume";
+
     [SerializeField] private AudioClipRefSO audioClipRefSO;
 
     private int volume = 5;
@@ -11,6 +13,7 @@ public class SoundManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        LoadVolume();
     }
 
     private void Start()
@@ -92,10 +95,21 @@ public class SoundManager : MonoBehaviour
         {
             volume = 0;
         }
+        SaveVolume();
     }
 
     public int GetVolume()
     {
         return volume;
+    }
+
+    private void SaveVolume()
+    {
+        PlayerPrefs.SetInt(SOUNDMANAGER_VOLUME, volume);
+    }
+
+    private void LoadVolume()
+    {
+        volume = PlayerPrefs.GetInt(SOUNDMANAGER_VOLUME, volume);
     }
 }
